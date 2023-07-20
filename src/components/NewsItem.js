@@ -5,13 +5,12 @@ export class NewsItem extends Component {
         let {title,desc,imageUrl,newsUrl} = this.props;
         return (
             <>
-                <div className="card " style={{ width: '18rem' }}>
-                    <img src={imageUrl} className="card-img-top img-fluid" alt="..." />
+                <div className="card ">
+                    <img src={imageUrl===null?'https://c8.alamy.com/comp/CTG496/breaking-news-daily-newspaper-headline-CTG496.jpg':imageUrl} className="card-img-top img-fluid" alt="..." />
                     <div className="card-body">
                         <h5 className="card-title">{title}</h5>
                         <p className="card-text">{desc}</p>
-                      <a href={newsUrl} classname="btn btn-primary btn-sm " target="_blank" >Read More</a>
-
+                      <a rel='noreferrer' href={newsUrl} className='btn btn-dark btn-sm' target='_blank'>Read more</a> 
                     </div>
                 </div>
 
