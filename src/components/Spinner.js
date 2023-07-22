@@ -4,8 +4,8 @@ import 'P:\\React Course\\news-app\\src\\App.css'
 export class Spinner extends Component {
   render() {
     return (
-      <div id='flexbox'>
-       
+      <div id='spinner'>
+
         <img src={loader} alt="loader" />
       </div>
     )
