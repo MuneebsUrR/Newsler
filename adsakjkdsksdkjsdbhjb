@@ -1,0 +1,23 @@
+[33mcommit 20f30e952862d1b65c3400d50455ae72019c825d[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: Muneeb Ur Rehman <muneebsurrehman@gmail.com>
+Date:   Sat Jul 22 23:14:50 2023 +0500
+
+    added a new section of top picks for you using another newsapi/everything
+
+[33mcommit a37fca868c4a455f0c18f4b18ad7909dc502a0d5[m
+Author: Muneeb Ur Rehman <muneebsurrehman@gmail.com>
+Date:   Thu Jul 20 15:10:50 2023 +0500
+
+    added a loader and next,previous buttons
+
+[33mcommit 17b7ea01e4eb94b8cb2c15c59f7bca9acd18a0c3[m
+Author: Muneeb Ur Rehman <muneebsurrehman@gmail.com>
+Date:   Sun Jul 16 20:06:07 2023 +0500
+
+    Articles fetched using newsapi
+
+[33mcommit 70f0e41d869c3643563c7293b61680abc1b6baf1[m
+Author: Muneeb Ur Rehman <muneebsurrehman@gmail.com>
+Date:   Fri Jul 14 23:06:00 2023 +0500
+
+    Initialize project using Create React App

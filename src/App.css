@@ -18,17 +18,17 @@
     background-color: #e3f2fd;
     max-width: min-content;
     position: fixed;
-    bottom: 19vh;
+    bottom: 6vh;
     padding: 15px;
     margin: 20px;
-    height: 50vh;
+    height: 73vh;
     overflow: auto;
   }
 }
 
 @media (max-width : 800px) {
-  .verticalSection {
-    display: none;
+  .flexBox {
+    display: none !important;
    
   }
 

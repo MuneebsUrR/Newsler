@@ -13,7 +13,7 @@ export class Verticalsection extends Component {
                         <div className="card-body">
                             <h5 className="card-title">{title} </h5>
                             <p className="card-text">{desc}</p>
-                            <a href={newsUrl} className="btn btn-primary">Read More</a>
+                            <a href={newsUrl} className="btn btn-dark btn-sm">Read More</a>
                         </div>
 
                     </div>
