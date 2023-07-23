@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
 
 export class NewsItem extends Component {
+    static defaultProps = {
+        title: 'Unknown title',
+        desc: 'click on the read more button for the description',
+
+    }
     render() {
         let { title, desc, imageUrl, newsUrl } = this.props;
         return (
@@ -10,13 +15,13 @@ export class NewsItem extends Component {
                     <div className="card-body">
                         <h5 className="card-title">{title}</h5>
                         <p className="card-text">{desc}</p>
-                       
+
                         <a rel='noreferrer' href={newsUrl} className='btn btn-dark btn-sm' target='_blank'  >Read more</a>
-                     
+
                     </div>
                 </div>
 
-           </>
+            </>
         )
     }
 }

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import NewsItem from './NewsItem'
 import Spinner from './Spinner';
 import Verticalsection from './Verticalsection';
-import InfiniteScroll from 'react-infinite-scroll-component';
+
 import 'P:\\React Course\\news-app\\src\\App.css'
 export class News extends Component {
 
@@ -13,9 +13,10 @@ export class News extends Component {
     super();
     this.state = {
       Articles: this.Articles,
-      sideArticles : this.sideArticles,
+      sideArticles: this.sideArticles,
       loader: false,
       page: 1,
+      sideArticlespage: 1,
     }
   }
 
@@ -30,10 +31,10 @@ export class News extends Component {
     let sideData = await fetch(sideArticlesUrl);
     let parsedData = await data.json();
     let sideArticlesParsedData = await sideData.json();
-   
+
     this.setState({
       Articles: parsedData.articles || [],
-      sideArticles : sideArticlesParsedData.articles || [],
+      sideArticles: sideArticlesParsedData.articles || [],
       totalArticle: parsedData.totalResults || 0,
       loader: false,
     })
@@ -78,18 +79,27 @@ export class News extends Component {
     })
   }
 
-  fetchMoreData =async ()=>{
-  
-    let sideArticlesUrl = 'https://newsapi.org/v2/everything?domains=techcrunch.com,thenextweb.com&apiKey=cdbc3077b6b94db89b1fe640f6b2d4a2&pageSize=20';
-    
+  fetchMoreData = async () => {
+
+    let sideArticlesUrl = `https://newsapi.org/v2/everything?domains=techcrunch.com,thenextweb.com&apiKey=cdbc3077b6b94db89b1fe640f6b2d4a2&page=${this.state.sideArticlespage + 1}&pageSize=20`;
+
     let sideData = await fetch(sideArticlesUrl);
- 
+
     let sideArticlesParsedData = await sideData.json();
-   
+
     this.setState({
-      sideArticles : this.state.sideArticles.concat(sideArticlesParsedData.articles) || [],
+      sideArticles: this.state.sideArticles.concat(sideArticlesParsedData.articles) || [],
+      sideArticlespage: this.state.sideArticlespage + 1,
     })
   }
+
+  handleVerticalScroll = (event) => {
+    const target = event.target;
+    if (target.scrollHeight - target.scrollTop === target.clientHeight) {
+      this.fetchMoreData();
+    }
+  }
+
   render() {
     return (
       <>
@@ -98,9 +108,9 @@ export class News extends Component {
         {this.state.loader && <Spinner />}
 
         <div className="container-fluid my-2" id='container'>
-       {!this.state.loader && <>
-        <h2 className='  text-center ' style={{marginTop:'65px'}}>{this.props.topHeading} </h2><hr />
-       </>} 
+          {!this.state.loader && <>
+            <h2 className='  text-center ' style={{ marginTop: '65px' }}>{this.props.topHeading} </h2><hr />
+          </>}
           <div className="row">
 
             {!this.state.loader && this.state.Articles.map
@@ -118,36 +128,32 @@ export class News extends Component {
 
           </div>
           {!this.state.loader &&
-          <div className="d-flex justify-content-between m-4 ">
-            <button disabled={this.state.page <= 1} onClick={this.handleonPrevious} className="btn btn-dark">&larr; Previous</button>
-            <button disabled={this.state.page + 1 > Math.ceil(this.state.totalArticle / this.props.noOfarticles)} id='nextButton' className="btn btn-dark" onClick={this.handleonNext}>Next &rarr;</button>
+            <div className="d-flex justify-content-between m-4 ">
+              <button disabled={this.state.page <= 1} onClick={this.handleonPrevious} className="btn btn-dark">&larr; Previous</button>
+              <button disabled={this.state.page + 1 > Math.ceil(this.state.totalArticle / this.props.noOfarticles)} id='nextButton' className="btn btn-dark" onClick={this.handleonNext}>Next &rarr;</button>
+            </div>
+          }
+        </div>
+
+        {!this.state.loader &&
+          <div className="flexBox d-flex flex-column verticalSection" onScroll={this.handleVerticalScroll}>
+            <h4 className="text-center" style={{ padding: '10px' }}>
+              Top Picks for you
+            </h4>
+
+
+            {this.state.sideArticles.map((sidearticle) => (
+              <Verticalsection
+                key={sidearticle.url}
+                title={sidearticle.title}
+                desc={sidearticle.description}
+                newsUrl={sidearticle.url}
+              />
+            ))}
           </div>
         }
-        </div>
-        
-        
-       
-        {!this.state.loader && 
-        <div className="flexBox d-flex flex-column"  >
-          <InfiniteScroll
-          dataLength={this.state.sideArticles.length}
-          next={this.fetchMoreData}
-          hasMore={this.state.sideArticles.length!== this.state.totalResults}
-          loader={<h4>Loading...</h4>}
-        >
 
-           <h4 className=' text-center ' style={{  padding:'10px'}}>Top Picks for you</h4>
-          { this.state.sideArticles.map((sidearticle)=>{
-              return (
-                <Verticalsection title={sidearticle.title} desc={sidearticle.description} newsUrl={sidearticle.url}/>
-              )
-            } )}
-          
-            
-          </InfiniteScroll>
-        </div>}
-       
-       
+
       </>
     )
   }
