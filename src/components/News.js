@@ -26,7 +26,7 @@ export class News extends Component {
     })
 
     let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=cdbc3077b6b94db89b1fe640f6b2d4a2&pageSize=${this.props.noOfarticles}`;
-    let sideArticlesUrl = 'https://newsapi.org/v2/everything?domains=techcrunch.com,thenextweb.com&apiKey=cdbc3077b6b94db89b1fe640f6b2d4a2&pageSize=20';
+    let sideArticlesUrl = `https://newsapi.org/v2/everything?domains=techcrunch.com,thenextweb.com&apiKey=cdbc3077b6b94db89b1fe640f6b2d4a2&pageSize=20`;
     let data = await fetch(url);
     let sideData = await fetch(sideArticlesUrl);
     let parsedData = await data.json();
