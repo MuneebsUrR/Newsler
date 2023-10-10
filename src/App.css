@@ -5,6 +5,22 @@
   height:100vh;
 }
 
+
+.Newscard {
+  display: grid;
+  grid-template-rows: auto 1fr auto; /* Auto, 1fr (flex), auto */
+  height: 100%;
+}
+
+.card-button{
+  padding: 10px;
+}
+
+
+.Newscard:hover{
+  box-shadow: 1px 3px 20px 3px rgb(220, 220, 220) ;
+}
+
 @media (min-width:800px) {
   #container {
     width: 65%;
@@ -23,6 +39,7 @@
     margin: 20px;
     height: 73vh;
     overflow: auto;
+    border-radius: 10px ;
   }
 }
 

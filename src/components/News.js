@@ -44,7 +44,7 @@ export class News extends Component {
   handleonNext = async () => {
 
     if (this.state.page + 1 > Math.ceil(this.state.totalArticle / this.props.noOfarticles)) {
-      // document.getElementById('nextButton').disabled = true;
+      
     }
     else {
       this.setState({
@@ -64,7 +64,7 @@ export class News extends Component {
 
   }
   handleonPrevious = async () => {
-    // document.getElementById('nextButton').disabled = false;
+   
     this.setState({
       loader: true,
     })
@@ -80,17 +80,23 @@ export class News extends Component {
   }
 
   fetchMoreData = async () => {
+    if (this.state.sideArticles.length>99) {
+      
+    }
+    else{
 
+   
     let sideArticlesUrl = `https://newsapi.org/v2/everything?domains=techcrunch.com,thenextweb.com&apiKey=cdbc3077b6b94db89b1fe640f6b2d4a2&page=${this.state.sideArticlespage + 1}&pageSize=20`;
-
     let sideData = await fetch(sideArticlesUrl);
-
+    
     let sideArticlesParsedData = await sideData.json();
+    console.log(sideArticlesParsedData)
 
     this.setState({
       sideArticles: this.state.sideArticles.concat(sideArticlesParsedData.articles) || [],
       sideArticlespage: this.state.sideArticlespage + 1,
     })
+  }
   }
 
   handleVerticalScroll = (event) => {
@@ -136,19 +142,22 @@ export class News extends Component {
         </div>
 
         {!this.state.loader &&
-          <div className="flexBox d-flex flex-column verticalSection" onScroll={this.handleVerticalScroll}>
+          <div className="flexBox d-flex flex-column verticalSection"  onScroll={this.handleVerticalScroll}>
             <h4 className="text-center" style={{ padding: '10px' }}>
               Top Picks for you
             </h4>
 
 
             {this.state.sideArticles.map((sidearticle) => (
-              <Verticalsection
-                key={sidearticle.url}
-                title={sidearticle.title}
-                desc={sidearticle.description}
-                newsUrl={sidearticle.url}
-              />
+              <div  key={sidearticle.url}>
+
+                <Verticalsection
+                  key={sidearticle.url}
+                  title={sidearticle.title}
+                  desc={sidearticle.description}
+                  newsUrl={sidearticle.url}
+                />
+              </div>
             ))}
           </div>
         }
