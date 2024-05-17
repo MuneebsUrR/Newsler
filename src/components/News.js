@@ -3,7 +3,7 @@ import NewsItem from './NewsItem'
 import Spinner from './Spinner';
 import Verticalsection from './Verticalsection';
 
-import 'P:\\React Course\\news-app\\src\\App.css'
+import '../App.css'
 export class News extends Component {
 
   Articles = [];
@@ -31,7 +31,7 @@ export class News extends Component {
     let sideData = await fetch(sideArticlesUrl);
     let parsedData = await data.json();
     let sideArticlesParsedData = await sideData.json();
-
+    console.log("ustaaadd")
     this.setState({
       Articles: parsedData.articles || [],
       sideArticles: sideArticlesParsedData.articles || [],

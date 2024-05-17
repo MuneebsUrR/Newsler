@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import loader from './loader.gif'
-import 'P:\\React Course\\news-app\\src\\App.css'
+import '../App.css'
 export class Spinner extends Component {
   render() {
     return (
